@@ -1,10 +1,12 @@
-import {Router} from "express";
-import {ContratanteController} from "../controllers/contratante-controller.js";
+import { Router } from 'express';
+import { createContratante, getAllContratantes, updateContratante, deleteContratante } from '../controllers/contratante-controller';
 
 const router = Router();
-const contratanteController = new ContratanteController();
 
-router.post("/contratantes", (req, res) => contratanteController.createContratante(req, res));
-router.get("/contratantes", (req, res) => contratanteController.getAllContratantes(req, res));
+// Definir as rotas para o CRUD de contratantes
+router.post('/contratantes', createContratante);
+router.get('/contratantes', getAllContratantes);
+router.put('/contratantes/:id', updateContratante);
+router.delete('/contratantes/:id', deleteContratante);
 
 export default router;

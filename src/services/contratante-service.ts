@@ -1,28 +1,38 @@
-import {Contratante} from "../models/contratante-model.js";
+// Esse service não está conectado ao banco de dados, ele apenas simula a lógica de CRUD com um array
 
-export class ContratanteService {
-    public async createContratante(nomeCompleto: string): Promise<Contratante> {
-        try{
-            const contratante = await Contratante.create({nomeCompleto});
-            return contratante;
-        }catch (error){
-            if (error instanceof Error){
-                throw new Error(`Unable to create contratante: ${error.message}`);
-            }else{
-                throw new Error("An unknown error occurred.");
-            }
-        }
-    }
+let contratantes: { id: number, nomeCompleto: string }[] = [];
+let currentId = 1;
 
-    public async getAllContratantes(): Promise<Contratante[]> {
-        try {
-            return await Contratante.findAll();
-        }catch (error) {
-            if (error instanceof Error) {
-                throw new Error(`Unable to fetch contratantes:  lalles: pterror.message)' $(error.message)`);
-            }else{
-                throw new Error("An unknown error occurred.");
-            }
-        }
+export const contratanteService = {
+  // Criar um novo contratante
+  createContratante: (nomeCompleto: string) => {
+    const newContratante = { id: currentId++, nomeCompleto };
+    contratantes.push(newContratante);
+    return newContratante;
+  },
+
+  // Buscar todos os contratantes
+  getAllContratantes: () => {
+    return contratantes;
+  },
+
+  // Atualizar um contratante
+  updateContratante: (id: number, nomeCompleto: string) => {
+    const index = contratantes.findIndex(c => c.id === id);
+    if (index !== -1) {
+      contratantes[index].nomeCompleto = nomeCompleto;
+      return contratantes[index];
     }
-}
+    return null;
+  },
+
+  // Deletar um contratante
+  deleteContratante: (id: number) => {
+    const index = contratantes.findIndex(c => c.id === id);
+    if (index !== -1) {
+      contratantes.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+};

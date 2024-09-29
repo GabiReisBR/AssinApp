@@ -1,9 +1,10 @@
 import {Model, DataTypes, Optional} from "sequelize";
 import sequelize from "../shared/connection";
+import Job from "../models/job-model.js";
 
 
 
-export interface ContratanteAttributes {
+export interface ContractAttributes {
     id: number;
     terms: string;
     clientid: number;
@@ -12,10 +13,10 @@ export interface ContratanteAttributes {
     status: string;
   }
 
-export interface ContratanteCreationAttributes extends Optional<ContratanteAttributes, "id"> { }
-export class Contratante extends Model<ContratanteAttributes, ContratanteCreationAttributes>
+export interface ContractCreationAttributes extends Optional<ContractAttributes, "id"> { }
+export class Contract extends Model<ContractAttributes, ContractCreationAttributes>
 
-implements ContratanteAttributes {
+implements ContractAttributes {
     public id!: number;
     public terms!: string;
     public clientid!: number;
@@ -28,7 +29,7 @@ implements ContratanteAttributes {
   }
 
 
-Contratante.init(
+Contract.init(
     {
         id:{
             type:DataTypes.INTEGER,
@@ -41,13 +42,17 @@ Contratante.init(
         },
         clientid:{
             type:DataTypes.INTEGER,
-            primaryKey:true,
-            allowNull: false,
+            references: {
+                model: 'Profile',
+                key: 'id'
+            },
         },
         contractorid:{
             type:DataTypes.INTEGER,
-            primaryKey:true,
-            allowNull: false,
+            references: {
+                model: 'Profile',
+                key: 'id'
+            },
         },
         operationdate:{ 
             type:DataTypes.DATE,
@@ -67,4 +72,8 @@ Contratante.init(
     }
 );
 
-export default Contratante;
+
+Contract.hasMany(Job, { foreignKey: "contract_id" });
+Job.belongsTo(Contract, { foreignKey: "contract_id" });
+
+export default Contract;

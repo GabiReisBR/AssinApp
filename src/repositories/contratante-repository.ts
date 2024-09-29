@@ -1,4 +1,4 @@
-import {Contratante, ContratanteCreationAttributes} from "../models/contratante-models";
+import {Contratante, ContratanteCreationAttributes} from "../models/contratante-model";
 
 export class ContratanteRepository {
     public async create(data: ContratanteCreationAttributes): Promise<Contratante> {

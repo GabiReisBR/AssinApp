@@ -1,7 +1,7 @@
 import express from "express";
-import contratanteRoutes from "./routes/contratante-routes.js";
+import contractRoutes from "./routes/contract-routes.js";
 import sequelize from "./shared/connection.js";
-import {Contratante} from "./models/contratante-model.js";
+import {Contract} from "./models/contract-model.js";
 
 const app = express();
 app.use(express.json());
@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
     res.status(200).send("unifio api sla oq");
 });
 
-app.use("/", contratanteRoutes);
+app.use("/", contractRoutes);
 
 (async () => {
     try {

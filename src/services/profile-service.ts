@@ -53,10 +53,10 @@ export class ProfileService {
             });
 
             if (result === 0) {
-                throw new Error(`Trabalho com ID ${id} não encontrado`);
+                throw new Error(`Perfil com ID ${id} não encontrado`);
             }
         } catch (error) {
-            throw new Error(`Impossível excluir trabalho com ID ${id}: ${(error as Error).message}`);
+            throw new Error(`Impossível excluir perfil com ID ${id}: ${(error as Error).message}`);
         }
     }
 
@@ -74,9 +74,9 @@ export class ProfileService {
             return updatedProfile;
         } catch (error) {
             if (error instanceof Error) {
-                throw new Error(`Impossível atualizar trabalho: ${error.message}`);
+                throw new Error(`Impossível atualizar perfil: ${error.message}`);
             } else {
-                throw new Error("Um erro desconhecido ocorreu ao tentar atualizar o trabalho.");
+                throw new Error("Um erro desconhecido ocorreu ao tentar atualizar o perfil.");
             }
         }
     }

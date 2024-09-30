@@ -45,4 +45,39 @@ export class ProfileService {
         await profile.save();
         return profile;
     }
+
+    public async deleteProfile(id: number): Promise<void> {
+        try {
+            const result = await Profile.destroy({
+                where: { id }
+            });
+
+            if (result === 0) {
+                throw new Error(`Trabalho com ID ${id} não encontrado`);
+            }
+        } catch (error) {
+            throw new Error(`Impossível excluir trabalho com ID ${id}: ${(error as Error).message}`);
+        }
+    }
+
+    public async update(id: number, data: Partial<ProfileAttributes>): Promise<Profile | null> {
+        try {
+            const [numberOfAffectedRows, [updatedProfile]] = await Profile.update(
+                data,
+                { where: { id }, returning: true }
+            );
+
+            if (numberOfAffectedRows === 0) {
+                return null;
+            }
+
+            return updatedProfile;
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Impossível atualizar trabalho: ${error.message}`);
+            } else {
+                throw new Error("Um erro desconhecido ocorreu ao tentar atualizar o trabalho.");
+            }
+        }
+    }
 }

@@ -31,4 +31,39 @@ export class JobService {
         const unpaidJobs = await Job.sum('price', { where: { paid: false } });
         return unpaidJobs || 0;
     }
+
+    public async deleteJob(id: number): Promise<void> {
+        try {
+            const result = await Job.destroy({
+                where: { id }
+            });
+
+            if (result === 0) {
+                throw new Error(`Trabalho com ID ${id} não encontrado`);
+            }
+        } catch (error) {
+            throw new Error(`Impossível excluir trabalho com ID ${id}: ${(error as Error).message}`);
+        }
+    }
+
+    public async update(id: number, data: Partial<JobAttributes>): Promise<Job | null> {
+        try {
+            const [numberOfAffectedRows, [updatedJob]] = await Job.update(
+                data,
+                { where: { id }, returning: true }
+            );
+
+            if (numberOfAffectedRows === 0) {
+                return null;
+            }
+
+            return updatedJob;
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Impossível atualizar trabalho: ${error.message}`);
+            } else {
+                throw new Error("Um erro desconhecido ocorreu ao tentar atualizar o trabalho.");
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import {Model, DataTypes, Optional, DoubleDataType} from "sequelize";
+import {Model, DataTypes, Optional, DoubleDataType, Sequelize} from "sequelize";
 import sequelize from "../shared/connection";
 
 
@@ -28,6 +28,7 @@ implements ProfileAttributes {
   }
 
 
+export function initializeProfile(sequelize:Sequelize){
 Profile.init(
     {
         id:{
@@ -64,5 +65,6 @@ Profile.init(
         freezeTableName: true,
     }
 );
+}
 
 export default Profile;

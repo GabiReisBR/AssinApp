@@ -1,4 +1,4 @@
-import {Model, DataTypes, Optional, DoubleDataType} from "sequelize";
+import {Model, DataTypes, Optional, DoubleDataType, Sequelize} from "sequelize";
 import sequelize from "../shared/connection";
 
 
@@ -24,6 +24,7 @@ implements DepositAttributes {
   }
 
 
+export function initializeDeposit(sequelize:Sequelize){
 Deposit.init(
     {
         id:{
@@ -55,5 +56,6 @@ Deposit.init(
         freezeTableName: true,
     }
 );
+}
 
 export default Deposit;

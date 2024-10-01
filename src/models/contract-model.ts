@@ -1,4 +1,4 @@
-import {Model, DataTypes, Optional} from "sequelize";
+import {Model, DataTypes, Optional, Sequelize} from "sequelize";
 import sequelize from "../shared/connection";
 import Job from "../models/job-model.js";
 
@@ -29,6 +29,7 @@ implements ContractAttributes {
   }
 
 
+export function initializeContract(sequelize:Sequelize){
 Contract.init(
     {
         id:{
@@ -71,7 +72,7 @@ Contract.init(
         freezeTableName: true,
     }
 );
-
+}
 
 Contract.hasMany(Job, { foreignKey: "contract_id" });
 Job.belongsTo(Contract, { foreignKey: "contract_id" });

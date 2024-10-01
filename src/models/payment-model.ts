@@ -1,4 +1,4 @@
-import {Model, DataTypes, Optional} from "sequelize";
+import {Model, DataTypes, Optional, Sequelize} from "sequelize";
 import sequelize from "../shared/connection";
 
 
@@ -24,6 +24,7 @@ implements PaymentAttributes {
   }
 
 
+export function initializePayment(sequelize:Sequelize){
 Payment.init(
     {
         id:{
@@ -55,5 +56,6 @@ Payment.init(
         freezeTableName: true,
     }
 );
+}
 
 export default Payment;

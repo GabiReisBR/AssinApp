@@ -1,4 +1,4 @@
-import {Model, DataTypes, Optional, TinyIntegerDataType, DoubleDataType} from "sequelize";
+import {Model, DataTypes, Optional, TinyIntegerDataType, DoubleDataType, Sequelize} from "sequelize";
 import sequelize from "../shared/connection";
 
 
@@ -30,6 +30,7 @@ implements JobAttributes {
   }
 
 
+export function initializeJob(sequelize:Sequelize){
   Job.init(
     {
         id:{
@@ -73,5 +74,6 @@ implements JobAttributes {
         freezeTableName: true,
     }
 );
+}
 
 export default Job;

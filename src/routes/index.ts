@@ -1,8 +1,8 @@
-import contractRoutes from "./contract-routes";
-import depositRoutes from "./deposit-routes";
-import jobRoutes from "./job-routes";
-import paymentRoutes from "./payment-routes";
-import profileRoutes from "./profile-routes";
+import contractRoutes from "./contract-routes.js";
+import depositRoutes from "./deposit-routes.js";
+import jobRoutes from "./job-routes.js";
+import paymentRoutes from "./payment-routes.js";
+import profileRoutes from "./profile-routes.js";
 
 export {
     contractRoutes,

@@ -1,21 +1,16 @@
 {
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.5.5",
-    "typescript": "^5.6.2"
+  "compilerOptions": {
+    "module": "ESNext",                 
+    "target": "ES6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,   
+    "types":["node","express"]              
   },
-  "dependencies": {
-    "express": "^4.21.0",
-    "sequelize": "^6.37.3"
-  },
-  "name": "assinapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "include": ["src/*/.ts"],
+  "exclude": ["node_modules"]
 }

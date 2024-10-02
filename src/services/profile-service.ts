@@ -35,13 +35,13 @@ export class ProfileService {
         return profile.balance;
     }
 
-    public async deposit(id: number, amount: number): Promise<Profile | null> {
+    public async deposit(id: number, depositvalue: number): Promise<Profile | null> {
         const profile = await Profile.findByPk(id);
         if (!profile) {
             return null;
         }
 
-        profile.balance = profile.balance + amount;
+        profile.balance = profile.balance + depositvalue;
         await profile.save();
         return profile;
     }
